@@ -133,12 +133,7 @@ function draw()
     
     fill(181,101,29);
 //    triangle(0, floorPos_y+50, 10, floorPos_y+40, 20,floorPos_y+50);
-    rect(0, floorPos_y+50, width, height/4); // draw some soil
-    
-    
-    
-    
-    
+    rect(0, floorPos_y+50, width, height/4); // draw some soil 
     
 
     push();
@@ -192,6 +187,7 @@ function draw()
     triangle (gameChar_world_x-40, floorPos_y + 50, gameChar_world_x-50, floorPos_y + 40, gameChar_world_x-40, floorPos_y + 30);
     triangle (gameChar_world_x+50, floorPos_y + 50, gameChar_world_x+60, floorPos_y + 40, gameChar_world_x+50, floorPos_y + 30); //right
     triangle (gameChar_world_x+40, floorPos_y + 50, gameChar_world_x+50, floorPos_y + 40, gameChar_world_x+40, floorPos_y + 30);
+    
     
     pop();
 
@@ -289,10 +285,6 @@ function draw()
 }
 
 
-//
-
-windowResized();
-
 // ---------------------
 // Key control functions
 // ---------------------
@@ -332,11 +324,23 @@ function keyReleased()
 }
 
 function touchStarted(event) {
-  console.log(event);
-    if (dist(event.clientX, event.clientY, width/2-48, floorPos_y + 70) < 45 || dist(event.pageX, event.pageY, width/2-48, floorPos_y + 70) < 45) {
+  
+    if (
+            (event.type == "mousedown" && 
+                dist(event.clientX, event.clientY, width/2-48, floorPos_y + 70) < 45) || 
+            (event.type == "touchstart" && 
+                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2-48, floorPos_y + 70) < 45)
+        ) 
+    {
         isLeft = true;
     }
-    if (dist(event.clientX, event.clientY, width/2+48, floorPos_y + 70) < 45 || dist(event.pageX, event.pageY, width/2+48, floorPos_y + 70) < 45) {
+    if (
+            (event.type == "mousedown" && 
+                dist(event.clientX, event.clientY, width/2+48, floorPos_y + 70) < 45) || 
+            (event.type == "touchstart" && 
+                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2+48, floorPos_y + 70) < 45)
+        ) 
+    {
         isRight = true;
     }
     return false;
