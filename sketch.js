@@ -111,7 +111,7 @@ function startGame(){
 function setup()
 {
 	createCanvas(windowWidth, windowHeight);
-	floorPos_y = height * 3/4;
+	floorPos_y = windowHeight * 3/4;
    
     lives = 3;
         
@@ -289,6 +289,10 @@ function draw()
 }
 
 
+//
+
+windowResized();
+
 // ---------------------
 // Key control functions
 // ---------------------
@@ -342,7 +346,6 @@ function touchEnded(event){
     isLeft = false;
     isRight = false;
 }
-
 
 // ------------------------------
 // Game character render function
@@ -658,4 +661,8 @@ function checkPlayerDie () {
         died = true;
         startGame();
     }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
