@@ -184,14 +184,14 @@ function draw()
     
     //touch screen buttons
     fill(0);
-    ellipse(gameChar_world_x-48, floorPos_y + 70, 45);
-    ellipse(gameChar_world_x+48, floorPos_y + 70, 45);
+    ellipse(gameChar_world_x-48, floorPos_y + 40, 45);
+    ellipse(gameChar_world_x+48, floorPos_y + 40, 45);
     
     fill(255);
-    triangle (gameChar_world_x-50, floorPos_y + 80, gameChar_world_x-60, floorPos_y + 70, gameChar_world_x-50, floorPos_y + 60); //left
-    triangle (gameChar_world_x-40, floorPos_y + 80, gameChar_world_x-50, floorPos_y + 70, gameChar_world_x-40, floorPos_y + 60);
-    triangle (gameChar_world_x+50, floorPos_y + 80, gameChar_world_x+60, floorPos_y + 70, gameChar_world_x+50, floorPos_y + 60); //right
-    triangle (gameChar_world_x+40, floorPos_y + 80, gameChar_world_x+50, floorPos_y + 70, gameChar_world_x+40, floorPos_y + 60);
+    triangle (gameChar_world_x-50, floorPos_y + 50, gameChar_world_x-60, floorPos_y + 40, gameChar_world_x-50, floorPos_y + 30); //left
+    triangle (gameChar_world_x-40, floorPos_y + 50, gameChar_world_x-50, floorPos_y + 40, gameChar_world_x-40, floorPos_y + 30);
+    triangle (gameChar_world_x+50, floorPos_y + 50, gameChar_world_x+60, floorPos_y + 40, gameChar_world_x+50, floorPos_y + 30); //right
+    triangle (gameChar_world_x+40, floorPos_y + 50, gameChar_world_x+50, floorPos_y + 40, gameChar_world_x+40, floorPos_y + 30);
     
     pop();
 
@@ -328,11 +328,11 @@ function keyReleased()
 }
 
 function touchStarted(event) {
-  
-    if (dist(event.clientX, event.clientY, width/2-48, floorPos_y + 70) < 45) {
+  console.log(event);
+    if (dist(event.clientX, event.clientY, width/2-48, floorPos_y + 70) < 45 || dist(event.pageX, event.pageY, width/2-48, floorPos_y + 70) < 45) {
         isLeft = true;
     }
-    if (dist(event.clientX, event.clientY, width/2+48, floorPos_y + 70) < 45) {
+    if (dist(event.clientX, event.clientY, width/2+48, floorPos_y + 70) < 45 || dist(event.pageX, event.pageY, width/2+48, floorPos_y + 70) < 45) {
         isRight = true;
     }
     return false;
