@@ -18,7 +18,7 @@ var isPlummeting;
 var clouds;
 var mountains;
 var trees_x;
-var canyons;
+//var canyons;
 var collectables;
 
 var game_score;
@@ -77,12 +77,12 @@ function startGame(){
         }
     ];
 
-    canyons = [
-        {x_pos: -100, width: 100}, 
-        {x_pos: 800, width: 80},
-        {x_pos: 950, width: 80},
-        {x_pos: 150, width: 100}
-    ];
+//    canyons = [
+//        {x_pos: -100, width: 100}, 
+//        {x_pos: 800, width: 80},
+//        {x_pos: 950, width: 80},
+//        {x_pos: 150, width: 100}
+//    ];
 
     mountains = [
         {x_pos: -100, y_pos: floorPos_y, size: 150}, 
@@ -116,9 +116,13 @@ function setup()
     lives = 3;
         
     startGame();
-
+    
+    function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }
 
+}
+windowResized();
 function draw()
 {
 	background(100, 155, 255); // fill the sky blue
@@ -147,11 +151,11 @@ function draw()
     drawTrees();
 
 	// Draw canyons.
-    for (var i = 0; i < canyons.length; i++)
-    {
-        drawCanyon(canyons[i]);
-        checkCanyon(canyons[i]);
-    }
+//    for (var i = 0; i < canyons.length; i++)
+//    {
+//        drawCanyon(canyons[i]);
+//        checkCanyon(canyons[i]);
+//    }
 
 	// Draw collectable items.
     for(var i = 0; i < collectables.length; i++)
@@ -327,18 +331,18 @@ function touchStarted(event) {
   
     if (
             (event.type == "mousedown" && 
-                dist(event.clientX, event.clientY, width/2-48, floorPos_y + 70) < 45) || 
+                dist(event.clientX, event.clientY, width/2-48, floorPos_y + 40) < 25) || 
             (event.type == "touchstart" && 
-                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2-48, floorPos_y + 70) < 45)
+                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2-48, floorPos_y + 40) < 25)
         ) 
     {
         isLeft = true;
     }
     if (
             (event.type == "mousedown" && 
-                dist(event.clientX, event.clientY, width/2+48, floorPos_y + 70) < 45) || 
+                dist(event.clientX, event.clientY, width/2+48, floorPos_y + 40) < 25) || 
             (event.type == "touchstart" && 
-                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2+48, floorPos_y + 70) < 45)
+                dist(event.changedTouches[0].clientX, event.changedTouches[0].clientY, width/2+48, floorPos_y + 40) < 25)
         ) 
     {
         isRight = true;
@@ -455,6 +459,20 @@ function drawGameChar()
 		// add your jumping facing forwards code
         fill(235, 240, 165);
         ellipse(gameChar_x,gameChar_y-50,20); //head
+        
+        stroke(0);
+        strokeWeight(.6);
+        fill(255);
+        ellipse(gameChar_x-5,gameChar_y-51,7); //left eye
+        fill(0);
+        ellipse(gameChar_x-5,gameChar_y-51,1); //apple of the left eye
+        fill(255);
+        ellipse(gameChar_x+5,gameChar_y-51,7); //right eye
+        fill(0);
+        ellipse(gameChar_x+5,gameChar_y-51,1); //apple of the right eye
+        
+        noStroke();
+        fill(235, 240, 165);
         rect(gameChar_x-10,gameChar_y-50,-5,20); //left hand
         rect(gameChar_x+10,gameChar_y-50,+5,20); //right hand
 
@@ -570,36 +588,36 @@ function drawTrees ()
 
 // Function to draw canyon objects.
 
-function drawCanyon(t_canyon)
-{    
-    //draw the canyon
-    fill(102,102,153);
-    rect(t_canyon.x_pos, floorPos_y, t_canyon.width, height);//borders of the canyon
-    fill(255,215,0);
-    rect(t_canyon.x_pos + 20, floorPos_y, t_canyon.width - 40, height);//yellow space for the character to fall within
-    fill(100,155,255);
-    rect(t_canyon.x_pos + 20, floorPos_y+140, t_canyon.width - 40, height);//water
-    
-    
-}
-
-// Function to check character is over a canyon.
-
-function checkCanyon(t_canyon)
-{
-    if  (
-        (gameChar_world_x > t_canyon.x_pos + 30 && gameChar_y >= floorPos_y) && 
-        (gameChar_world_x < t_canyon.x_pos + t_canyon.width - 30 && gameChar_y >= floorPos_y)
-        )
-    {
-        isPlummeting = true;
-    }
-    if (isPlummeting){
-        gameChar_y +=1;
-        isLeft = false;
-        isRight = false;
-    }
-}
+//function drawCanyon(t_canyon)
+//{    
+//    //draw the canyon
+//    fill(102,102,153);
+//    rect(t_canyon.x_pos, floorPos_y, t_canyon.width, height);//borders of the canyon
+//    fill(255,215,0);
+//    rect(t_canyon.x_pos + 20, floorPos_y, t_canyon.width - 40, height);//yellow space for the character to fall within
+//    fill(100,155,255);
+//    rect(t_canyon.x_pos + 20, floorPos_y+140, t_canyon.width - 40, height);//water
+//    
+//    
+//}
+//
+//// Function to check character is over a canyon.
+//
+//function checkCanyon(t_canyon)
+//{
+//    if  (
+//        (gameChar_world_x > t_canyon.x_pos + 30 && gameChar_y >= floorPos_y) && 
+//        (gameChar_world_x < t_canyon.x_pos + t_canyon.width - 30 && gameChar_y >= floorPos_y)
+//        )
+//    {
+//        isPlummeting = true;
+//    }
+//    if (isPlummeting){
+//        gameChar_y +=1;
+//        isLeft = false;
+//        isRight = false;
+//    }
+//}
 
 // ----------------------------------
 // Collectable items render and check functions
@@ -665,8 +683,4 @@ function checkPlayerDie () {
         died = true;
         startGame();
     }
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
 }
